@@ -7,16 +7,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.xml.crypto.dsig.keyinfo.PGPData;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Cadastro {
+public class Cadastro extends Main{
 
 	private JFrame frame;
 	private JTextField nome;
 	private JTextField idade;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -64,10 +66,16 @@ public class Cadastro {
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Pessoa p = new Pessoa(nome.getText(), Integer.valueOf(idade.getText()));
-								
-				ListPessoas t = new ListPessoas();
-				System.out.println(t.getList().toString());
+				
+				Integer new_idade = Integer.valueOf(idade.getText());
+				String new_nome = nome.getText();
+				
+				if(new_idade >= 65){
+					getPmaiores().addPessoa(new_nome, new_idade);					
+				}else{
+					getPmenores().addPessoa(new_nome, new_idade);
+				}
+							
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());

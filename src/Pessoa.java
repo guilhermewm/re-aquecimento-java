@@ -2,28 +2,37 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Pessoa {
-	private int flag_idade;
 	private String nome;
 	private int idade;
-	private ListPessoas lp = new ListPessoas();
-	
 	
 	public Pessoa(String nome, Integer idade) {
 		super();
 		this.nome = nome;
-		this.idade = idade;
-		this.flag_idade = 0;
-		 
-		
-		if(idade >= 65){
-			flag_idade = 1;
-		}else{
-			flag_idade = 0;
-		}
-		
-		lp.addPessoa(flag_idade, nome);
-		
-		System.out.println(lp);
+		this.idade = idade;			
 	}
 		
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+	public int getIdade() {
+		return idade;
+	}
+
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	@Override
+	public String toString() {
+		return "Pessoa [nome=" + nome + ", idade=" + idade + "]";
+	}
+
 }
