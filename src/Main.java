@@ -22,6 +22,7 @@ public class Main extends JFrame {
 
 	private ListPessoasMaiores pmaiores = new ListPessoasMaiores();
 	private ListPessoasMenores pmenores = new ListPessoasMenores();
+	private Pessoa p;
 	
 	
 	public ListPessoasMenores getPmenores() {
@@ -70,27 +71,58 @@ public class Main extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Cadastro pt = new Cadastro();
-				pt.newScreen();
+				Cadastro pt = new Cadastro(pmaiores, pmenores);
+				Cadastro.newScreen();
 				
 			}
 		});
-		
-		JButton btn_caixa_prioritario = new JButton("Caixa priorit\u00E1rio");
-		btn_caixa_prioritario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				System.out.println(pmaiores.sizePessoas());
-			}
-		});
-		
-		JButton btn_caixa_normal = new JButton("Caixa normal");
 		
 		JTextPane text_caixa_prioritario = new JTextPane();
 		text_caixa_prioritario.setEnabled(false);
 		
+		JButton btn_caixa_prioritario = new JButton("Caixa priorit\u00E1rio");
+		btn_caixa_prioritario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(pmaiores.sizePessoas() == 0){
+					if(pmenores.sizePessoas() == 0){
+						text_caixa_prioritario.setText("Não há pessoas na fila");
+					}else{
+						p = pmenores.getPessoaFila();						
+						pmenores.excluiDaFila();
+						text_caixa_prioritario.setText(p.toString());
+					}
+				}else{
+					p = pmaiores.getPessoaFila();	
+					pmaiores.excluiDaFila();
+					text_caixa_prioritario.setText(p.toString());			
+				}
+				
+				System.out.println(pmaiores);
+			}
+		});
+		
+		
 		JTextPane text_caixa_normal = new JTextPane();
 		text_caixa_normal.setEnabled(false);
+		
+		JButton btn_caixa_normal = new JButton("Caixa normal");
+		btn_caixa_normal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(pmenores.sizePessoas() == 0){
+					text_caixa_normal.setText("Não há pessoas na Fila");
+				}else{
+					p = pmenores.getPessoaFila();	
+					pmenores.excluiDaFila();
+					text_caixa_normal.setText(p.toString());
+				}
+				
+				System.out.println(pmenores);
+			}
+		});
+		
+		
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

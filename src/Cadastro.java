@@ -11,13 +11,19 @@ import javax.xml.crypto.dsig.keyinfo.PGPData;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 
-public class Cadastro extends Main{
+public class Cadastro{
+	
+	
 
 	private JFrame frame;
 	private JTextField nome;
 	private JTextField idade;
+	private static ListPessoasMaiores pmaiores;
+	private static ListPessoasMenores pmenores;
+	
 	
 	/**
 	 * Launch the application.
@@ -26,7 +32,7 @@ public class Cadastro extends Main{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cadastro window = new Cadastro();
+					Cadastro window = new Cadastro(pmaiores, pmenores);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,9 +44,12 @@ public class Cadastro extends Main{
 	/**
 	 * Create the application.
 	 */
-	public Cadastro() {
+	public Cadastro(ListPessoasMaiores pmaiores, ListPessoasMenores pmenores) {		
 		initialize();
+		this.pmaiores = pmaiores;
+		this.pmenores = pmenores;		
 	}
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -48,7 +57,7 @@ public class Cadastro extends Main{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		JLabel lblNome = new JLabel("Nome:");
 		
@@ -71,11 +80,13 @@ public class Cadastro extends Main{
 				String new_nome = nome.getText();
 				
 				if(new_idade >= 65){
-					getPmaiores().addPessoa(new_nome, new_idade);					
+					pmaiores.addPessoa(new_nome, new_idade);
+					
 				}else{
-					getPmenores().addPessoa(new_nome, new_idade);
+					pmenores.addPessoa(new_nome, new_idade);					
 				}
-							
+				
+				
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());

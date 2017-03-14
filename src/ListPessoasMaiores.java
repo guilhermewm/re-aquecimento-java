@@ -12,11 +12,24 @@ public class ListPessoasMaiores {
 		p = new Pessoa(nome, idade);
 		pessoas_maiores.add(p);
 		
-		System.out.println("Lista maior: " + pessoas_maiores);
+		
+	}
+
+	@Override
+	public String toString() {
+		return "ListPessoasMaiores [pessoas_maiores=" + pessoas_maiores + "]";
 	}
 
 	public int sizePessoas(){
 		return pessoas_maiores.size();
+	}
+	
+	public void excluiDaFila(){
+		pessoas_maiores.remove(0);
+	}
+	
+	public Pessoa getPessoaFila(){
+		return pessoas_maiores.get(0);
 	}
 
 	

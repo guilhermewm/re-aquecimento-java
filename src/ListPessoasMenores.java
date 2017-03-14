@@ -12,8 +12,26 @@ public class ListPessoasMenores {
 		p = new Pessoa(nome, idade);
 		pessoas_menores.add(p);
 		
-		System.out.println("Lista menor: " + pessoas_menores);
+	}
+
+
+	@Override
+	public String toString() {
+		return "ListPessoasMenores [pessoas_menores=" + pessoas_menores + "]";
+	}
+
+
+	public int sizePessoas(){
+		return pessoas_menores.size();
 	}
 	
+	public void excluiDaFila(){
+		pessoas_menores.remove(0);
+	}
+	
+	public Pessoa getPessoaFila(){
+		return pessoas_menores.get(0);
+	}
+
 	
 }
